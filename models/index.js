@@ -22,5 +22,6 @@ const db={};
 
 db.Sequelize=Sequelize;
 db.sequelize=sequelize;
+db.Category =require("./category.model")(Sequelize,sequelize);
 
 module.exports=db;
