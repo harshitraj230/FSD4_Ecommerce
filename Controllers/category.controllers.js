@@ -1,6 +1,5 @@
 
 
-const { response } = require("express");
 const db=require("../models");
 const Category = db.Category;
 

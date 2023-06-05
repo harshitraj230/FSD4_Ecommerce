@@ -20,6 +20,8 @@ db.sequelize.sync({force:false})
 //imported category routes
 require("./Routes/category.routes")(app);
 
+//import product routes
+require("./Routes/product.routes")(app);
 
 app.listen(process.env.PORT,()=>{
     console.log(`Application is running on port ${process.env.PORT}`);
