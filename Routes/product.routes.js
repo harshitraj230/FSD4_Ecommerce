@@ -12,6 +12,7 @@ module.exports=(app)=>{
     app.get("/ecomm/api/v1/products/:id",ProductControllers.findOne);
 
     //update
+   
 
     //delete
     app.delete("/ecomm/api/v1/products/:id",ProductControllers.delete);
