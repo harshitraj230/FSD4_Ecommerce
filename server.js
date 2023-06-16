@@ -17,6 +17,20 @@ db.sequelize.sync({force:false})
     console.log("DB synced");
 })
 
+/**
+ * Add roles
+ */
+
+// db.Role.create({
+//     id:1,
+//     name:"user"
+// });
+
+// db.Role.create({
+//     id:2,
+//     name:"admin"
+// })
+
 //imported category routes
 require("./Routes/category.routes")(app);
 
@@ -24,7 +38,10 @@ require("./Routes/category.routes")(app);
 require("./Routes/product.routes")(app);
 
 //import Auth routes
-require("./Routes/auth.routes");
+require("./Routes/auth.routes")(app);
+
+//import User routes
+require("./Routes/user.routes")(app);
 
 app.listen(process.env.PORT,()=>{
     console.log(`Application is running on port ${process.env.PORT}`);
