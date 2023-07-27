@@ -1,5 +1,6 @@
 const {User, Role, Sequelize, ROLES} = require("../models");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 exports.signup= async (req,res)=>{
     var {userName,email,password,roles}=req.body;
     if(!roles || !roles.length){
@@ -33,10 +34,18 @@ exports.signIn = async (req,res) =>{
 
     if(!isPasswordValid){
         return res.status(401).send({message:"Invalid Password"});
-    } 
+    }
+
+    console.log(user.id);
+    
+    const token=jwt.sign({ id:user.id }, process.env.SECRET_KEY,{expiresIn:86400});
+
+    console.log(token);
+
         res.send({id:user.id,
             userName:user.userName,
             email:user.email,
-            roles:user.roles
+            roles:user.roles,
+            accessToken:token
         })
 }
