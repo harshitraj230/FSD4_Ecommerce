@@ -1,10 +1,12 @@
 const {Product,Category,Sequelize} = require("../models");
 const Op=Sequelize.Op;
 exports.create=(req,res)=>{
+    if(!req.isAdmin){
+        return res.status(403).send({message:"OOPS! you are unauthorized to perform this task"});
+    }
     const {name,description,cost,categoryId}=req.body;
     const product = {name,description,cost,categoryId};
-    Product.create(product)
-    .then(product=>{
+    Product.create(product).then(product=>{
         res.status(201).send(product);
     })
     .catch((err)=>{
@@ -13,7 +15,6 @@ exports.create=(req,res)=>{
 }
 exports.findAll=(req,res)=>{
     const {name,minCost,maxCost}=req.query;
-    let productsPromise=null;
     console.log(req.query);
     if(name){
         productsPromise=Product.findAll({
